@@ -25,9 +25,19 @@ public class TicTacToe
 
     private boolean isWinner()
     {
+        int playerTotal = player * 3;
         for (int index = 0; index < SIZE; index++)
         {
-            if (board[0][index] == player && board[1][index] == player && board[2][index] == player)
+            if (board[0][index] + board[1][index] + board[2][index] == playerTotal)
+            {
+                return true;
+            } else if (board[index][0] + board[index][1] + board[index][2] == playerTotal)
+            {
+                return true;
+            } else if (board[SIZE - 3][SIZE - 3] + board[SIZE - 2][SIZE - 2] + board[SIZE - 1][SIZE - 1] == playerTotal)
+            {
+                return true;
+            } else if (board[SIZE - 3][SIZE - 1] + board[SIZE - 2][SIZE - 2] + board[SIZE - 1][SIZE - 3] == playerTotal)
             {
                 return true;
             }

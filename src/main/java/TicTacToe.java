@@ -17,30 +17,36 @@ public class TicTacToe
         setBox(x, y, player);
 
         if(isWinner())
+        {
             return player + " is the winner";
+        } else if (isDraw())
+        {
+            return "The result is draw";
+        }
         return "No winner";
-
-
     }
 
     private boolean isWinner()
     {
         int playerTotal = player * 3;
-        for (int index = 0; index < SIZE; index++)
+        char diagonal1 = '\0';
+        char diagonal2 = '\0';
+        for (int i = 0; i < SIZE; i++)
         {
-            if (board[0][index] + board[1][index] + board[2][index] == playerTotal)
+            diagonal1 += board[i][i];
+            diagonal2 += board[i][SIZE - i - 1];
+            if (board[0][i] + board[1][i] + board[2][i] == playerTotal)
             {
                 return true;
-            } else if (board[index][0] + board[index][1] + board[index][2] == playerTotal)
-            {
-                return true;
-            } else if (board[SIZE - 3][SIZE - 3] + board[SIZE - 2][SIZE - 2] + board[SIZE - 1][SIZE - 1] == playerTotal)
-            {
-                return true;
-            } else if (board[SIZE - 3][SIZE - 1] + board[SIZE - 2][SIZE - 2] + board[SIZE - 1][SIZE - 3] == playerTotal)
+            } else if (board[i][0] + board[i][1] + board[i][2] == playerTotal)
             {
                 return true;
             }
+        }
+
+        if (diagonal1 == playerTotal || diagonal2 == playerTotal)
+        {
+            return true;
         }
         return false;
     }
@@ -78,5 +84,20 @@ public class TicTacToe
             return 'O';
         else
             return 'X';
+    }
+
+    private boolean isDraw()
+    {
+        for (int x = 0; x < SIZE; x++)
+        {
+            for (int y = 0; y <SIZE; y++)
+            {
+                if (board[x][y] == '\0')
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
